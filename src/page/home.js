@@ -359,27 +359,36 @@ const Home = () => {
         display: 'flex',
         justifyContent: 'center',
         aligItems: 'center',
-        margin: 'auto',
-        width: 100
+        marginTop: 200
     }
 
     const [number, setNumber] = React.useState(0)
 
+    const handleChangeQuote = () => {
+        setNumber(Math.floor(Math.random() * (quotes.length)))
+    }
+
     return (
         <div style={styleBox}>
-            <div id='quote-box'>
+            <div id='quote-box' style={{boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px', width: 300, padding: 40, borderRadius: 10}}>
                 {
                     quotes.map((res, index) =>
                         index === number && 
                         <div key={index}>
-                            <div id='text'>{res.text}</div>
-                            <div id='author'>{res.source}</div>
+                            <div id='text' style={{textAlign : 'center', padding: 5}}>{res.text}</div>
+                            <div id='author' style={{textAlign: 'right',padding: 10}}>{res.source}</div>
                         </div>
                     )
                 }
-                <div id="buttons" class="text-center">
-                    <button id='new-quote'>new</button>
-                    <a id='tweet-quote' href="https://twitter.com/intent/tweet" target="_blank" >tweet</a>
+                <div id="buttons" class="text-center" style={{display: ' flex', justifyContent: 'space-between'}}>
+                    <a id='tweet-quote' href="https://twitter.com/intent/tweet" >tweet</a>
+                    <button 
+                        onClick={handleChangeQuote} 
+                        id='new-quote'
+                        style={{border: 'none', padding: '10px 20px', cursor: 'pointer'}}
+                    >
+                        New Quote
+                    </button>
                 </div>
             </div>
         </div>
